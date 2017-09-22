@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login and Registration | Success</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        .i_b {
+            display: inline-block;
+            
+        }
+
+        .m_l{
+            
+            margin-left: 30%;
+        }
+
+        .m_r{
+            margin-right: 10%;
+        }
+
+        .v_a{
+            vertical-align: top;
+            width: 30%;
+        }
+        .grey {
+            background-color: lightgrey;
+        }
+
+        p{
+            margin: 2px;
+        }
+
+        div.scroll {
+            width: 100%;
+            height: 20%;
+            overflow: scroll;
+        }
+    </style>
+    <body>
+        <div class = 'grey'> 
+            <h4 class = 'i_b'>Success! Welcome {{request.session.name}}</h4>
+
+            <a href="/books/add" class = 'i_b m_l'>Add Book and Review</a>
+            <a href="/logout" class = 'i_b'>Logout</a>
+        </div>
+
+        <div class='i_b m_r'>
+        <h4>Recent Book Reviews</h4>
+            {% for review in reviews %}
+                <p><a href="/books/{{review.book.id}}">  {{review.book.title}}</a></p>
+                <p>Rating: {{review.rating}}</p>
+                <p><a href="/users/{{review.user.id}}">{{review.user.alias}}</a> says: <i>{{review.content}}</i> </p>
+                <p>{{review.created_at}}</p>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class='i_b v_a'>
+            <h4>Other Books with Reviews:</h4>
+            <div class="scroll">
+                {% for book in books %}
+                    <p><a href="/books/{{book.id}}">{{book.title}}</a></p>
+                {% endfor %}
+
+            </div>
+        </div>
+    </body>
+</html>
